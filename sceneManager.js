@@ -4,8 +4,9 @@ var gameManager;
 function setup() {
   config = new Config();
   config.table = new Table(config.directions);
-  config.balls[0] = new Ball(200, 200, 5);
-  config.balls[1] = new Ball(100, 202, 0);
+  config.balls[0] = new Ball(200, 200, 7);
+  config.balls[1] = new Ball(100, 202, 2);
+  config.balls[2] = new Ball(150, 100, 5);
 
   gameManager = new GameManager(config);
 

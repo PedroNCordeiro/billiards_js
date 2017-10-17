@@ -9,7 +9,9 @@ function Config() {
 
 	this.directions = new Directions();
 
-	this.balls = [{}, {}];
+	this.balls = [{}, {}, {}];
 
 	this.table = {};
+
+	this.friction = .985;
 }
