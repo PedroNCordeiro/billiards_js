@@ -1,31 +1,38 @@
-function Table() {
+function Table(directions) {
+
+	this.cushions = [{}, {}, {}, {}];
 
 	this.setup = function() {
 		this.width = 800;
 		this.height = 400;
 
-		this.cushionLength = 40;
+		this.cushionLength = 10;
 	}
 
 	this.createSprites = function() {
-		this.topCushion = createSprite(this.width/2, this.cushionLength/2, this.width, this.cushionLength);
-		this.topCushion.shapeColor = color(0, 80, 20);	
 
-		this.leftCushion = createSprite(this.cushionLength/2, this.height/2, this.cushionLength, this.height);
-		this.leftCushion.shapeColor = color(0, 80, 20);	
+		this.cushions[directions.UP] = createSprite(this.width/2, this.cushionLength/2, this.width, this.cushionLength);
+		this.cushions[directions.UP].shapeColor = color(0, 80, 20);
+		this.cushions[directions.UP].immovable = true;
 
-		this.rightCushion = createSprite(this.width - this.cushionLength/2, this.height/2, this.cushionLength, this.height);
-		this.rightCushion.shapeColor = color(0, 80, 20);	
+		this.cushions[directions.LEFT] = createSprite(this.cushionLength/2, this.height/2, this.cushionLength, this.height);
+		this.cushions[directions.LEFT].shapeColor = color(0, 80, 20);	
+		this.cushions[directions.LEFT].immovable = true;
 
-		this.bottomCushion = createSprite(this.width/2, this.height - this.cushionLength/2, this.width, this.cushionLength);
-		this.bottomCushion.shapeColor = color(0, 80, 20);	
+		this.cushions[directions.RIGHT] = createSprite(this.width - this.cushionLength/2, this.height/2, this.cushionLength, this.height);
+		this.cushions[directions.RIGHT].shapeColor = color(0, 80, 20);	
+		this.cushions[directions.RIGHT].immovable = true;
+
+		this.cushions[directions.DOWN] = createSprite(this.width/2, this.height - this.cushionLength/2, this.width, this.cushionLength);
+		this.cushions[directions.DOWN].shapeColor = color(0, 80, 20);	
+		this.cushions[directions.DOWN].immovable = true;
 	}
 
 	this.drawCushions = function() {
-		drawSprite(this.topCushion);
-		drawSprite(this.leftCushion);
-		drawSprite(this.rightCushion);
-		drawSprite(this.bottomCushion);
+		drawSprite(this.cushions[directions.UP]);
+		drawSprite(this.cushions[directions.LEFT]);
+		drawSprite(this.cushions[directions.RIGHT]);
+		drawSprite(this.cushions[directions.DOWN]);
 	}
 
 	this.draw = function() {
