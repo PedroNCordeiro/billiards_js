@@ -1,12 +1,19 @@
 var config;
 var gameManager;
 
+function DrawLineHelper() {
+  white_ball_position = config.balls_array[config.balls.WHITE_IDX].sprite.position;
+
+  line(mouseX, mouseY, white_ball_position.x, white_ball_position.y);
+}
+
 function setup() {
   config = new Config();
   config.table = new Table(config.directions);
-  config.balls[0] = new Ball(200, 200, 7);
-  config.balls[1] = new Ball(100, 202, 2);
-  config.balls[2] = new Ball(150, 100, 5);
+
+  config.balls_array[config.balls.WHITE_IDX] = new Ball(200, 200, config.balls.WHITE_COLOR);
+  config.balls_array[config.balls.YELLOW_IDX] = new Ball(100, 202, config.balls.YELLOW_COLOR);
+  config.balls_array[config.balls.RED_IDX] = new Ball(150, 100, config.balls.RED_COLOR);
 
   gameManager = new GameManager(config);
 
@@ -15,7 +22,7 @@ function setup() {
 
 function draw() {
 
-  gameManager.gameLoop();
+  gameManager.GameLoop();
 
   background(255);
 
@@ -23,7 +30,10 @@ function draw() {
   config.table.draw();
 
   // Balls
-  for (var i = 0; i < config.balls.length; i++) {
-    config.balls[i].draw();
+  for (var i = 0; i < config.balls_array.length; i++) {
+    config.balls_array[i].draw();
   }
+
+  // Draw line between mouse and white ball
+  DrawLineHelper();
 }
