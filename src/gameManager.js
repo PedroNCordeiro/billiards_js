@@ -10,21 +10,13 @@ function GameManager(config) {
 		return true;
 	}
 
-	this.MakeShot = function() {
-
-		var v1 = createVector(mouseX, mouseY);
+	this.Shoot = function() {
 		
-		var white_ball_position = config.balls_array[config.balls.WHITE_IDX].sprite.position;
-		var v2 = createVector(white_ball_position.x, white_ball_position.y);
-		var shotAngle = v1.angleBetween(v2);
-		// shotAngle = degrees(shotAngle);
-
-		console.log(v1);
-		console.log(v2); 
-		console.log(shotAngle);
-
-		// shotAngle = -180;
-		config.balls_array[config.balls.WHITE_IDX].sprite.setSpeed(6, shotAngle);
+		var whiteBallPosition = config.balls_array[config.balls.WHITE_IDX].sprite.position;
+		delta_x = mouseX - whiteBallPosition.x;
+		delta_y = mouseY - whiteBallPosition.y;
+		var angle = degrees(atan2(delta_y, delta_x));
+		config.balls_array[config.balls.WHITE_IDX].sprite.setSpeed(6, angle);
 	}
 
 	var canPlay = true;
@@ -61,7 +53,7 @@ function GameManager(config) {
 		// Player input
 		if (mouseIsPressed && canPlay) {
 			canPlay = false;
-			this.MakeShot();
+			this.Shoot();
 		}
 
 		if (this.EveryBallStill()) {
