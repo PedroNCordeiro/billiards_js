@@ -36,4 +36,8 @@ function draw() {
 
   // Draw line between mouse and white ball
   DrawLineHelper();
+
+  // Display shot power
+  fill(0,0,0);
+  text("Shot power: " + gameManager.GetShotPower(), 50, 50);
 }

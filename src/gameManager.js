@@ -1,5 +1,8 @@
 function GameManager(config) {
 	
+	var canPlay = true;
+	this.shotPower = 5;
+
 	// Check if every ball is still
 	this.EveryBallStill = function() {
 		for (var i = 0; i < config.balls_array.length; i++) {
@@ -11,15 +14,17 @@ function GameManager(config) {
 	}
 
 	this.Shoot = function() {
-		
 		var whiteBallPosition = config.balls_array[config.balls.WHITE_IDX].sprite.position;
 		delta_x = mouseX - whiteBallPosition.x;
 		delta_y = mouseY - whiteBallPosition.y;
 		var angle = degrees(atan2(delta_y, delta_x));
-		config.balls_array[config.balls.WHITE_IDX].sprite.setSpeed(6, angle);
+		config.balls_array[config.balls.WHITE_IDX].sprite.setSpeed(this.shotPower, angle);
 	}
 
-	var canPlay = true;
+	this.GetShotPower = function() {
+		return this.shotPower;
+	}
+
 	this.GameLoop = function() {
 
 		// Loop through every ball
@@ -50,7 +55,17 @@ function GameManager(config) {
 
 		}
 
-		// Player input
+		// Player input - Arrow keys to change shot power
+		if (canPlay) {
+			if (keyWentDown(UP_ARROW)) {
+				this.shotPower += 1
+			}
+			else if (keyWentDown(DOWN_ARROW)) {
+				this.shotPower -= 1
+			}
+		}
+
+		// Player input - Mouse press to make shot
 		if (mouseIsPressed && canPlay) {
 			canPlay = false;
 			this.Shoot();
