@@ -1,4 +1,2 @@
 # billiards_js
-A simple billiards game using p5 and p5.play
-
-Open src/index.html to run.
+A simple 3-ball cushion experiment to test the p5.play engine
